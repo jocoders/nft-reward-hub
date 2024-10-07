@@ -1,4 +1,4 @@
-#### LimitedEditionNFT | RewardToken | StakingManager
+# LimitedEditionNFT | RewardToken | StakingManager
 
 **Overview**
 
