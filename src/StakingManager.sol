@@ -7,9 +7,9 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {RewardToken} from "./RewardToken.sol";
 import {LimitedEditionNFT} from "./LimitedEditionNFT.sol";
 
-error NotOwner();
-error NoReward();
-error TokenAlreadyStaked();
+error NoReward(uint256 availableReward);
+error NotOwner(address sender, address owner);
+error TokenAlreadyStaked(uint256 tokenId);
 
 /// @title Staking Manager for NFTs
 /// @author Your Name
@@ -65,7 +65,7 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
     /// @notice Deposits an NFT into the contract for staking
     /// @param tokenId The token ID of the NFT to stake
     function depositNFT(uint256 tokenId) external {
-        if (stakings[tokenId] != 0) revert TokenAlreadyStaked();
+        if (stakings[tokenId] != 0) revert TokenAlreadyStaked(tokenId);
         address sender = msg.sender;
 
         uint256 data = packData(sender, block.timestamp);
@@ -77,11 +77,8 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
     /// @notice Withdraws accumulated rewards for a staked NFT
     /// @param tokenId The token ID of the staked NFT
     function withdrawReward(uint256 tokenId) external {
-        address user = getStakUser(stakings[tokenId]);
-        if (msg.sender != user) revert NotOwner();
-
-        uint256 reward = checkReward(tokenId);
-        if (reward < REWARD_PER_DAY) revert NoReward();
+        (address user, uint256 reward) = handleWithdraw(tokenId);
+        if (reward < REWARD_PER_DAY) revert NoReward(reward);
 
         stakings[tokenId] = packData(user, block.timestamp);
         rewardToken.mint(user, reward);
@@ -90,10 +87,7 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
     /// @notice Withdraws an NFT from staking and any accumulated rewards
     /// @param tokenId The token ID of the NFT to withdraw
     function withdrawNFT(uint256 tokenId) external {
-        address user = getStakUser(stakings[tokenId]);
-        if (msg.sender != user) revert NotOwner();
-
-        uint256 reward = checkReward(tokenId);
+        (address user, uint256 reward) = handleWithdraw(tokenId);
         delete stakings[tokenId];
 
         if (reward > 0) {
@@ -116,6 +110,14 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
         }
 
         return 0;
+    }
+
+    /// @return reward The amount of reward calculated based on the staking duration
+    function handleWithdraw(uint256 tokenId) private returns (address user, uint256 reward) {
+        user = getStakUser(stakings[tokenId]);
+        if (msg.sender != user) revert NotOwner(msg.sender, user);
+
+        reward = checkReward(tokenId);
     }
 
     /// @dev Packs the user address and timestamp into a single uint256

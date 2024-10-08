@@ -7,10 +7,6 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {MerkleProof} from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-error AlreadyMinted();
-error InvalidProofCheck();
-error InvalidProofParams();
-
 /// @title Limited Edition NFT Contract
 /// @author Evgenii Kireev
 /// @notice This contract manages the minting and distribution of limited edition NFTs with optional discount via Merkle proof
@@ -68,19 +64,18 @@ contract LimitedEditionNFT is Ownable2Step, ERC721, ERC2981 {
     /// @param to The address of the recipient
     /// @param merkleProof A list of bytes32 hashes that are used to verify discount eligibility
     function mint(address to, bytes32[] calldata merkleProof) external payable validateMint(to, discountPrice) {
-        if (merkleProof.length < 1) revert InvalidProofParams();
+        require(merkleProof.length > 0, "Invalid proof params");
 
         bytes32 leaf = keccak256(abi.encodePacked(to));
-        if (!MerkleProof.verify(merkleProof, merkleRoot, leaf)) revert InvalidProofCheck();
+        require(MerkleProof.verify(merkleProof, merkleRoot, leaf), "Invalid proof check");
 
-        uint256 uintAddress = uint256(uint160(to));
-        uint256 index = uintAddress / 256;
-        uint256 bit = uint256(1) << (uintAddress % 256);
+        uint256 addressAsUint = uint256(uint160(to));
+        uint256 index = addressAsUint / 256;
+        uint256 bit = uint256(1) << (addressAsUint % 256);
 
-        bool isDiscountClaimed = discountBitmap[index] & bit != 0;
-        if (isDiscountClaimed) revert AlreadyMinted();
-
+        require(discountBitmap[index] & bit == 0, "Already minted");
         discountBitmap[index] |= bit;
+
         _mintNFT(to);
     }
 
