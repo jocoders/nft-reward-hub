@@ -122,7 +122,7 @@ contract LimitedEditionNFT is Ownable2Step, ERC721, ERC2981 {
     function _mintNFT(address to) private {
         _mint(to, remainingSupply);
         unchecked {
-            remainingSupply--;
+            --remainingSupply;
         }
     }
 }
