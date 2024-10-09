@@ -112,7 +112,11 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
         return 0;
     }
 
-    /// @return reward The amount of reward calculated based on the staking duration
+    /// @notice Withdraws a staked NFT and calculates the reward
+    /// @dev This function retrieves the staker's address and reward, checks if the caller is the owner, and calculates the reward based on the staking duration
+    /// @param tokenId The token ID of the staked NFT
+    /// @return user The address of the user who staked the NFT
+    /// @return reward The calculated reward based on the staking duration
     function handleWithdraw(uint256 tokenId) private returns (address user, uint256 reward) {
         user = getStakUser(stakings[tokenId]);
         if (msg.sender != user) revert NotOwner(msg.sender, user);
@@ -143,7 +147,7 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
         assembly {
             mstore(0x00, user)
             mstore(0x20, tokenId)
-            log1(0x00, 0x40, eventHash)
+            log3(0x00, 0x40, eventHash, user, tokenId)
         }
     }
 }

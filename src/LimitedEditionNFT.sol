@@ -99,9 +99,6 @@ contract LimitedEditionNFT is Ownable2Step, ERC721, ERC2981 {
                 revert(0x00, 0x04)
             }
         }
-
-        (bool success,) = to.call{value: amount}("");
-        require(success, "Withdraw failed");
     }
 
     /// @notice Checks if the contract supports a specific interface
