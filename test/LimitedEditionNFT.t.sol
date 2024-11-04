@@ -12,7 +12,7 @@ import { IERC165 } from '@openzeppelin/contracts/interfaces/IERC165.sol';
 import { IERC1967 } from '@openzeppelin/contracts/interfaces/IERC1967.sol';
 import { MerkleProof } from '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
-contract StakingManagerTest is Test {
+contract LimitedEditionNFTTest is Test {
   bytes32 public merkleRoot;
   bytes32[] public leaves;
   StakingManager public manager;
@@ -47,34 +47,6 @@ contract StakingManagerTest is Test {
 
     vm.deal(alice, 100 ether);
     vm.deal(bob, 10 ether);
-  }
-
-  function testConstructorInitializesNftContract() public {
-    assertEq(address(manager.nftContract()), address(tokenNFT), 'NftContract should be initialized');
-  }
-
-  function testConstructorInitializesRewardToken() public {
-    assertEq(address(manager.rewardToken()), address(tokenReaward), 'RewardToken should be initialized');
-  }
-
-  function testConstructorInitializesBasePrice() public {
-    assertEq(tokenNFT.basePrice(), BASE_PRICE, 'Base price should be initialized');
-    assertNotEq(tokenNFT.basePrice(), 0, 'Base price should not be 0');
-  }
-
-  function testConstructorInitializesDiscountPrice() public {
-    assertEq(tokenNFT.discountPrice(), DISCOUNT_PRICE, 'Discount price should be initialized');
-    assertNotEq(tokenNFT.discountPrice(), 0, 'Discount price should not be 0');
-  }
-
-  function testConstructorInitializesMerkleRoot() public {
-    assertEq(tokenNFT.merkleRoot(), merkleRoot, 'Merkle root should be initialized');
-  }
-
-  function testInit() public {
-    assertEq(tokenNFT.merkleRoot(), merkleRoot, 'Merkle root should be the same');
-    assertEq(tokenNFT.basePrice(), BASE_PRICE, 'Base price should be the same');
-    assertEq(tokenNFT.discountPrice(), DISCOUNT_PRICE, 'Discount price should be the same');
   }
 
   function testDefaultRoyalty() public {
