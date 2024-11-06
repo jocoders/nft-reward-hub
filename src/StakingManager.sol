@@ -7,8 +7,6 @@ import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
 import { RewardToken } from './RewardToken.sol';
 import { LimitedEditionNFT } from './LimitedEditionNFT.sol';
 
-import { Test, console } from 'forge-std/Test.sol';
-
 /// @title Staking Manager for NFTs
 /// @author Your Name
 /// @notice This contract manages the staking of NFTs and distribution of rewards
@@ -19,9 +17,6 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
 
   mapping(uint256 => uint256) public stakings;
   uint256 public constant REWARD_PER_DAY = 10 * 1e18;
-
-  //   bytes32 private constant STAKED_EVENT_HASH = 0x9e71bc8eea02a63969f509818f2dafb9254532904319f9dbda79b67bd34a5f3d;
-  //   bytes32 private constant UNSTAKED_EVENT_HASH = 0x0f5bb82176feb1b5e747e28471aa92156a04d9f3ab9f45f28e2d704232b93f75;
 
   event Staked(address indexed user, uint256 indexed tokenId);
   event UnStaked(address indexed user, uint256 indexed tokenId);

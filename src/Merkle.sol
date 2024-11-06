@@ -1,26 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.20;
 
+/// @title A Merkle Tree utility contract for Solidity
+/// @notice Provides functions for Merkle proof verification and tree manipulation
 contract Merkle {
-    /**
-     *
-     * CONSTRUCTOR *
-     *
-     */
+    /// @notice Constructs a new Merkle contract instance
     constructor() {}
 
-    /**
-     *
-     * PROOF VERIFICATION *
-     *
-     */
+    /// @notice Verifies a Merkle proof for a given leaf and root
+    /// @param root The root of the Merkle tree
+    /// @param proof An array of bytes32 hashes that constitute the proof
+    /// @param valueToProve The leaf value to prove
+    /// @return True if the proof is valid, false otherwise
     function verifyProof(bytes32 root, bytes32[] memory proof, bytes32 valueToProve)
         external
         pure
         virtual
         returns (bool)
     {
-        // proof length must be less than max array size
         bytes32 rollingHash = valueToProve;
         uint256 length = proof.length;
         unchecked {
@@ -31,6 +28,11 @@ contract Merkle {
         return root == rollingHash;
     }
 
+    /// @notice Hashes two leaf pairs in a specified order
+    /// @dev This function uses inline assembly for optimized keccak256 hashing
+    /// @param left The left leaf in the pair
+    /// @param right The right leaf in the pair
+    /// @return _hash The resulting hash of the leaf pair
     function hashLeafPairs(bytes32 left, bytes32 right) public pure returns (bytes32 _hash) {
         assembly {
             switch lt(left, right)
@@ -46,11 +48,9 @@ contract Merkle {
         }
     }
 
-    /**
-     *
-     * PROOF GENERATION *
-     *
-     */
+    /// @notice Computes the root of a Merkle tree from an array of leaf values
+    /// @param data An array of leaf values
+    /// @return The computed root of the Merkle tree
     function getRoot(bytes32[] memory data) public pure virtual returns (bytes32) {
         require(data.length > 1, "won't generate root for single leaf");
         while (data.length > 1) {
@@ -59,16 +59,15 @@ contract Merkle {
         return data[0];
     }
 
+    /// @notice Generates a Merkle proof for a specific node
+    /// @param data An array of leaf values
+    /// @param node The index of the node to generate a proof for
+    /// @return An array of bytes32 hashes that constitute the proof
     function getProof(bytes32[] memory data, uint256 node) public pure virtual returns (bytes32[] memory) {
         require(data.length > 1, "won't generate proof for single leaf");
-        // The size of the proof is equal to the ceiling of log2(numLeaves)
         bytes32[] memory result = new bytes32[](log2ceilBitMagic(data.length));
         uint256 pos = 0;
 
-        // Two overflow risks: node, pos
-        // node: max array size is 2**256-1. Largest index in the array will be 1 less than that. Also,
-        // for dynamic arrays, size is limited to 2**64-1
-        // pos: pos is bounded by log2(data.length), which should be less than type(uint256).max
         while (data.length > 1) {
             unchecked {
                 if (node & 0x1 == 1) {
@@ -86,13 +85,12 @@ contract Merkle {
         return result;
     }
 
-    ///@dev function is private to prevent unsafe data from being passed
+    /// @dev Helper function to hash a level of nodes in the Merkle tree
+    /// @param data An array of leaf values from the current level
+    /// @return An array of new hashes forming the next level
     function hashLevel(bytes32[] memory data) private pure returns (bytes32[] memory) {
         bytes32[] memory result;
 
-        // Function is private, and all internal callers check that data.length >=2.
-        // Underflow is not possible as lowest possible value for data/result index is 1
-        // overflow should be safe as length is / 2 always.
         unchecked {
             uint256 length = data.length;
             if (length & 0x1 == 1) {
@@ -101,7 +99,6 @@ contract Merkle {
             } else {
                 result = new bytes32[](length / 2);
             }
-            // pos is upper bounded by data.length / 2, so safe even if array is at max size
             uint256 pos = 0;
             for (uint256 i = 0; i < length - 1; i += 2) {
                 result[pos] = hashLeafPairs(data[i], data[i + 1]);
@@ -111,54 +108,28 @@ contract Merkle {
         return result;
     }
 
-    /**
-     *
-     * MATH "LIBRARY" *
-     *
-     */
-
-    /// @dev  Note that x is assumed > 0
+    /// @notice Calculates the ceiling of the binary logarithm of a number
+    /// @param x The number to calculate the log2 ceiling for
+    /// @return The ceiling of the binary logarithm
     function log2ceil(uint256 x) public pure returns (uint256) {
         uint256 ceil = 0;
         uint256 pOf2;
-        // If x is a power of 2, then this function will return a ceiling
-        // that is 1 greater than the actual ceiling. So we need to check if
-        // x is a power of 2, and subtract one from ceil if so.
         assembly {
-            // we check by seeing if x == (~x + 1) & x. This applies a mask
-            // to find the lowest set bit of x and then checks it for equality
-            // with x. If they are equal, then x is a power of 2.
-
-            /* Example
-                x has single bit set
-                x := 0000_1000
-                (~x + 1) = (1111_0111) + 1 = 1111_1000
-                (1111_1000 & 0000_1000) = 0000_1000 == x
-
-                x has multiple bits set
-                x := 1001_0010
-                (~x + 1) = (0110_1101 + 1) = 0110_1110
-                (0110_1110 & x) = 0000_0010 != x
-            */
-
-            // we do some assembly magic to treat the bool as an integer later on
             pOf2 := eq(and(add(not(x), 1), x), x)
         }
-
-        // if x == type(uint256).max, than ceil is capped at 256
-        // if x == 0, then pO2 == 0, so ceil won't underflow
         unchecked {
             while (x > 0) {
                 x >>= 1;
                 ceil++;
             }
-            ceil -= pOf2; // see above
+            ceil -= pOf2;
         }
         return ceil;
     }
 
-    /// Original bitmagic adapted from https://github.com/paulrberg/prb-math/blob/main/contracts/PRBMath.sol
-    /// @dev Note that x assumed > 1
+    /// @notice Calculates the ceiling of the binary logarithm using bit manipulation
+    /// @param x The number to calculate the log2 ceiling for
+    /// @return The ceiling of the binary logarithm
     function log2ceilBitMagic(uint256 x) public pure returns (uint256) {
         if (x <= 1) {
             return 0;
