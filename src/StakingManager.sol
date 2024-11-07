@@ -6,6 +6,7 @@ import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {RewardToken} from "./RewardToken.sol";
 import {LimitedEditionNFT} from "./LimitedEditionNFT.sol";
+import {Test, console} from "forge-std/Test.sol";
 
 /// @title Staking Manager for NFTs
 /// @author Your Name
@@ -16,7 +17,7 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
     RewardToken public immutable rewardToken;
 
     mapping(uint256 => uint256) public stakings;
-    uint256 public constant REWARD_PER_DAY = 10 * 1e18;
+    uint256 public constant REWARD_PER_SECOND = 115_740_000_000_000;
 
     event Staked(address indexed user, uint256 indexed tokenId);
     event UnStaked(address indexed user, uint256 indexed tokenId);
@@ -76,10 +77,12 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
     /// @param tokenId The token ID of the staked NFT
     function withdrawReward(uint256 tokenId) external {
         (address user, uint256 reward) = handleWithdraw(tokenId);
-        if (reward == 0) revert NoReward(reward);
-
-        stakings[tokenId] = packData(user, block.timestamp);
-        rewardToken.mint(user, reward);
+        if (reward != 0) {
+            stakings[tokenId] = packData(user, block.timestamp);
+            rewardToken.mint(user, reward);
+        } else {
+            revert NoReward(reward);
+        }
     }
 
     /// @notice Withdraws an NFT from staking and any accumulated rewards
@@ -98,17 +101,14 @@ contract StakingManager is Ownable2Step, IERC721Receiver {
 
     /// @notice Checks the reward amount for a staked NFT
     /// @param tokenId The token ID of the staked NFT
-    /// @return The amount of reward due
-    function checkReward(uint256 tokenId) public view returns (uint256) {
+    /// @return reward amount of reward due
+    function checkReward(uint256 tokenId) public view returns (uint256 reward) {
         uint256 timestamp = uint256(uint96(stakings[tokenId]));
-
-        if (timestamp > 0) {
-            uint256 stakedTime = block.timestamp - timestamp;
-            uint256 rewardPerSecond = (REWARD_PER_DAY * 1e18) / 1 days;
-            return (stakedTime * rewardPerSecond) / 1e18;
+        if (timestamp != 0) {
+            reward = (block.timestamp - timestamp) * REWARD_PER_SECOND;
+        } else {
+            reward = 0;
         }
-
-        return 0;
     }
 
     /// @notice Withdraws a staked NFT and calculates the reward

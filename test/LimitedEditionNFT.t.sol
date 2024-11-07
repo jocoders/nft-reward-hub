@@ -27,7 +27,7 @@ contract LimitedEditionNFTTest is Test {
 
     uint256 private constant BASE_PRICE = 9999 gwei;
     uint256 private constant DISCOUNT_PRICE = 7777 gwei;
-    uint256 private constant REWARD_PER_DAY = 10 * 1e18;
+    uint256 public constant REWARD_PER_SECOND = 115_740_000_000_000;
 
     event Staked(address indexed user, uint256 indexed tokenId);
     event UnStaked(address indexed user, uint256 indexed tokenId);
@@ -326,7 +326,7 @@ contract LimitedEditionNFTTest is Test {
         vm.warp(block.timestamp + 3 days);
 
         uint256 reward = manager.checkReward(nftId);
-        assertEq(reward, REWARD_PER_DAY * 3 - 1, "Reward should be 30000000000000000000");
+        assertEq(reward, REWARD_PER_SECOND * 3600 * 72, "Reward should be 29999808000000000000");
 
         manager.withdrawReward(nftId);
         uint256 rewardAfter = manager.checkReward(nftId);
@@ -389,7 +389,7 @@ contract LimitedEditionNFTTest is Test {
         manager.depositNFT(nftId);
         vm.warp(block.timestamp + 3 days);
         uint256 reward = manager.checkReward(nftId);
-        assertEq(reward, REWARD_PER_DAY * 3 - 1, "Reward should be 30000000000000000000");
+        assertEq(reward, REWARD_PER_SECOND * 3600 * 72, "Reward should be 29999808000000000000");
 
         vm.expectEmit(address(manager));
         emit UnStaked(bob, nftId);

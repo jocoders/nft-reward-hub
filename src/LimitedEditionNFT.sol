@@ -17,7 +17,7 @@ contract LimitedEditionNFT is Ownable2Step, ERC721, ERC2981 {
     uint256 public remainingSupply = 1000;
     uint256 public constant MAX_SUPPLY = 1000;
 
-    bytes32 public merkleRoot;
+    bytes32 public immutable merkleRoot;
     mapping(uint256 => uint256) private discountBitmap;
 
     error InvalidAddress(address to);
@@ -84,6 +84,7 @@ contract LimitedEditionNFT is Ownable2Step, ERC721, ERC2981 {
     /// @param to The address to which the funds will be sent
     /// @param amount The amount of funds to withdraw
     function withdraw(address payable to, uint256 amount) external onlyOwner {
+        if (to == address(0)) revert InvalidAddress(to);
         (bool success,) = to.call{value: amount}("");
         if (!success) revert WithdrawFailed(to);
     }
