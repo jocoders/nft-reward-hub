@@ -1,0 +1,1127 @@
+Mutation testing report:
+Number of mutations:    102
+Killed:                 78 / 102
+
+Mutations:
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 66
+    Result: Killed
+    Original line:
+                 if (stakings[tokenId] != 0) revert TokenAlreadyStaked(tokenId);
+
+    Mutated line:
+                 if (stakings[tokenId] == 0) revert TokenAlreadyStaked(tokenId);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 while (data.length > 1) {
+
+    Mutated line:
+                 while (data.length <= 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 95
+    Result: Killed
+    Original line:
+                     if (length & 0x1 == 1) {
+
+    Mutated line:
+                     if (length | 0x1 == 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 72
+    Result: Killed
+    Original line:
+                         if (node & 0x1 == 1) {
+
+    Mutated line:
+                         if (node & 0x1 != 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 38
+    Result: Killed
+    Original line:
+             function acceptRewardTokenOwnership() external onlyOwner {
+
+    Mutated line:
+             function acceptRewardTokenOwnership() external  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                         } else if (node + 1 == data.length) {
+
+    Mutated line:
+                         } else if (node + 1 != data.length) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 93
+    Result: Lived
+    Original line:
+                 if (reward > 0) {
+
+    Mutated line:
+                 if (reward >= 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 72
+    Result: Killed
+    Original line:
+                         if (node & 0x1 == 1) {
+
+    Mutated line:
+                         if (node & 0x1 != 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 47
+    Result: Error
+    Original line:
+                 Ownable(msg.sender)
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 93
+    Result: Killed
+    Original line:
+                 if (reward > 0) {
+
+    Mutated line:
+                 if (reward <= 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 171
+    Result: Killed
+    Original line:
+                 if ((lsb == _x) && (msb > 0)) {
+
+    Mutated line:
+                 if ((lsb != _x) && (msb > 0)) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+             function mint(address to) external payable validateMint(to, basePrice) {
+
+    Mutated line:
+             function mint(address to) external payable  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 102
+    Result: Killed
+    Original line:
+                 _mint(to, remainingSupply);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 150
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 16) {
+
+    Mutated line:
+                 if (x < 2 ** 16) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 146
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 32) {
+
+    Mutated line:
+                 if (x < 2 ** 32) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 107
+    Result: Killed
+    Original line:
+                     reward = (block.timestamp - timestamp) * REWARD_PER_SECOND;
+
+    Mutated line:
+                     reward = (block.timestamp + timestamp) * REWARD_PER_SECOND;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 174
+    Result: Killed
+    Original line:
+                     return msb + 1;
+
+    Mutated line:
+                     return msb - 1;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 130
+    Result: Killed
+    Original line:
+                 return (uint256(uint160(user)) << 96) | timestamp;
+
+    Mutated line:
+                 return (uint256(uint160(user)) << 96) & timestamp;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 23
+    Result: Killed
+    Original line:
+                     for (uint256 i = 0; i < length; ++i) {
+
+    Mutated line:
+                     for (uint256 i = 0; i >= length; ++i) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/RewardToken.sol
+    Line nr: 21
+    Result: Killed
+    Original line:
+                 _mint(to, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 53
+    Result: Killed
+    Original line:
+                 _setDefaultRoyalty(msg.sender, 250);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 while (data.length > 1) {
+
+    Mutated line:
+                 while (data.length >= 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/RewardToken.sol
+    Line nr: 20
+    Result: Killed
+    Original line:
+             function mint(address to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function mint(address to, uint256 amount) external  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 162
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 2) {
+
+    Mutated line:
+                 if (x < 2 ** 2) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 133
+    Result: Lived
+    Original line:
+                 if (x <= 1) {
+
+    Mutated line:
+                 if (x < 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 120
+    Result: Lived
+    Original line:
+                     while (x > 0) {
+
+    Mutated line:
+                     while (x <= 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                         } else if (node + 1 == data.length) {
+
+    Mutated line:
+                         } else if (node - 1 == data.length) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                         } else if (node + 1 == data.length) {
+
+    Mutated line:
+                         } else if (node + 1 != data.length) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 130
+    Result: Killed
+    Original line:
+                 return (uint256(uint160(user)) << 96) | timestamp;
+
+    Mutated line:
+                 return (uint256(uint160(user)) >> 96) | timestamp;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 171
+    Result: Lived
+    Original line:
+                 if ((lsb == _x) && (msb > 0)) {
+
+    Mutated line:
+                 if ((lsb == _x) && (msb >= 0)) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 if (discountBitmap[index] & bit != 0) revert AlreadyMinted();
+
+    Mutated line:
+                 if (discountBitmap[index] | bit != 0) revert AlreadyMinted();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 103
+    Result: Killed
+    Original line:
+                         result[pos] = hashLeafPairs(data[i], data[i + 1]);
+
+    Mutated line:
+                         result[pos] = hashLeafPairs(data[i], data[i - 1]);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 154
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 8) {
+
+    Mutated line:
+                 if (x < 2 ** 8) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 61
+    Result: Killed
+    Original line:
+                 if (merkleProof.length == 0) revert InvalidProofParams();
+
+    Mutated line:
+                 if (merkleProof.length != 0) revert InvalidProofParams();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 102
+    Result: Killed
+    Original line:
+                     for (uint256 i = 0; i < length - 1; i += 2) {
+
+    Mutated line:
+                     for (uint256 i = 0; i <= length - 1; i += 2) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 102
+    Result: Killed
+    Original line:
+                     for (uint256 i = 0; i < length - 1; i += 2) {
+
+    Mutated line:
+                     for (uint256 i = 0; i >= length - 1; i += 2) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 120
+    Result: Lived
+    Original line:
+                     while (x > 0) {
+
+    Mutated line:
+                     while (x >= 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                         result = new bytes32[](length / 2 + 1);
+
+    Mutated line:
+                         result = new bytes32[](length / 2 - 1);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 77
+    Result: Killed
+    Original line:
+                             result[pos] = data[node + 1];
+
+    Mutated line:
+                             result[pos] = data[node - 1];
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 170
+    Result: Killed
+    Original line:
+                 uint256 lsb = (~_x + 1) & _x;
+
+    Mutated line:
+                 uint256 lsb = (~_x - 1) & _x;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 37
+    Result: Killed
+    Original line:
+                 if (msg.value < price) revert InsufficientFunds();
+
+    Mutated line:
+                 if (msg.value >= price) revert InsufficientFunds();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 60
+    Result: Killed
+    Original line:
+             function mint(address to, bytes32[] calldata merkleProof) external payable validateMint(to, discountPrice) {
+
+    Mutated line:
+             function mint(address to, bytes32[] calldata merkleProof) external payable  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 160
+    Result: Lived
+    Original line:
+                     msb += 4;
+
+    Mutated line:
+                     msb -= 4;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 142
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 64) {
+
+    Mutated line:
+                 if (x < 2 ** 64) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 138
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 128) {
+
+    Mutated line:
+                 if (x < 2 ** 128) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 158
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 4) {
+
+    Mutated line:
+                 if (x < 2 ** 4) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 166
+    Result: Killed
+    Original line:
+                 if (x >= 2 ** 1) {
+
+    Mutated line:
+                 if (x < 2 ** 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 120
+    Result: Killed
+    Original line:
+                 if (msg.sender != user) revert NotOwner(msg.sender, user);
+
+    Mutated line:
+                 if (msg.sender == user) revert NotOwner(msg.sender, user);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 73
+    Result: Killed
+    Original line:
+                             result[pos] = data[node - 1];
+
+    Mutated line:
+                             result[pos] = data[node + 1];
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 95
+    Result: Killed
+    Original line:
+                     if (length & 0x1 == 1) {
+
+    Mutated line:
+                     if (length & 0x1 != 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/RewardToken.sol
+    Line nr: 14
+    Result: Error
+    Original line:
+             constructor() ERC20("RewardToken", "RTK") Ownable(msg.sender) {}
+
+    Mutated line:
+             constructor()  Ownable(msg.sender) {}
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 35
+    Result: Killed
+    Original line:
+                 if (to == address(0)) revert InvalidAddress(to);
+
+    Mutated line:
+                 if (to != address(0)) revert InvalidAddress(to);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 156
+    Result: Lived
+    Original line:
+                     msb += 8;
+
+    Mutated line:
+                     msb -= 8;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 86
+    Result: Killed
+    Original line:
+                 if (to == address(0)) revert InvalidAddress(to);
+
+    Mutated line:
+                 if (to != address(0)) revert InvalidAddress(to);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 85
+    Result: Killed
+    Original line:
+             function withdraw(address payable to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function withdraw(address payable to, uint256 amount) external  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 36
+    Result: Killed
+    Original line:
+                 if (remainingSupply < 1) revert MaxSupplyReached();
+
+    Mutated line:
+                 if (remainingSupply >= 1) revert MaxSupplyReached();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                         result = new bytes32[](length / 2 + 1);
+
+    Mutated line:
+                         result = new bytes32[](length * 2 + 1);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 54
+    Result: Killed
+    Original line:
+                 if (msg.sender != address(nftContract)) revert WrongNftContract(msg.sender, id);
+
+    Mutated line:
+                 if (msg.sender == address(nftContract)) revert WrongNftContract(msg.sender, id);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 107
+    Result: Killed
+    Original line:
+                     reward = (block.timestamp - timestamp) * REWARD_PER_SECOND;
+
+    Mutated line:
+                     reward = (block.timestamp - timestamp) / REWARD_PER_SECOND;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 66
+    Result: Killed
+    Original line:
+                 require(data.length > 1, "won't generate proof for single leaf");
+
+    Mutated line:
+                 require(data.length <= 1, "won't generate proof for single leaf");
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 27
+    Result: Killed
+    Original line:
+                 return root == rollingHash;
+
+    Mutated line:
+                 return root != rollingHash;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 144
+    Result: Lived
+    Original line:
+                     msb += 64;
+
+    Mutated line:
+                     msb -= 64;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 148
+    Result: Lived
+    Original line:
+                     msb += 32;
+
+    Mutated line:
+                     msb -= 32;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 35
+    Result: Killed
+    Original line:
+                 if (to == address(0)) revert InvalidAddress(to);
+
+    Mutated line:
+                 if (to != address(0)) revert InvalidAddress(to);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 67
+    Result: Lived
+    Original line:
+                 uint256 index = addressAsUint / 256;
+
+    Mutated line:
+                 uint256 index = addressAsUint * 256;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 133
+    Result: Killed
+    Original line:
+                 if (x <= 1) {
+
+    Mutated line:
+                 if (x > 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 152
+    Result: Lived
+    Original line:
+                     msb += 16;
+
+    Mutated line:
+                     msb -= 16;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 164
+    Result: Lived
+    Original line:
+                     msb += 2;
+
+    Mutated line:
+                     msb -= 2;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 79
+    Result: Killed
+    Original line:
+                 if (reward != 0) {
+
+    Mutated line:
+                 if (reward == 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 97
+    Result: Killed
+    Original line:
+                         result[result.length - 1] = hashLeafPairs(data[length - 1], bytes32(0));
+
+    Mutated line:
+                         result[result.length + 1] = hashLeafPairs(data[length - 1], bytes32(0));
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 48
+    Result: Error
+    Original line:
+                 ERC721("LimitedEditionNFT", "LENFT")
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 106
+    Result: Killed
+    Original line:
+                 if (timestamp != 0) {
+
+    Mutated line:
+                 if (timestamp == 0) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 27
+    Result: Killed
+    Original line:
+                 return root == rollingHash;
+
+    Mutated line:
+                 return root != rollingHash;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 171
+    Result: Killed
+    Original line:
+                 if ((lsb == _x) && (msb > 0)) {
+
+    Mutated line:
+                 if ((lsb != _x) && (msb > 0)) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 99
+    Result: Killed
+    Original line:
+                         result = new bytes32[](length / 2);
+
+    Mutated line:
+                         result = new bytes32[](length * 2);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 while (data.length > 1) {
+
+    Mutated line:
+                 while (data.length >= 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 61
+    Result: Killed
+    Original line:
+                 if (merkleProof.length == 0) revert InvalidProofParams();
+
+    Mutated line:
+                 if (merkleProof.length != 0) revert InvalidProofParams();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 170
+    Result: Lived
+    Original line:
+                 uint256 lsb = (~_x + 1) & _x;
+
+    Mutated line:
+                 uint256 lsb = (~_x + 1) | _x;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 97
+    Result: Killed
+    Original line:
+                         result[result.length - 1] = hashLeafPairs(data[length - 1], bytes32(0));
+
+    Mutated line:
+                         result[result.length - 1] = hashLeafPairs(data[length + 1], bytes32(0));
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 73
+    Result: Killed
+    Original line:
+                 _mintNFT(to);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 54
+    Result: Killed
+    Original line:
+                 require(data.length > 1, "won't generate root for single leaf");
+
+    Mutated line:
+                 require(data.length <= 1, "won't generate root for single leaf");
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 54
+    Result: Lived
+    Original line:
+                 require(data.length > 1, "won't generate root for single leaf");
+
+    Mutated line:
+                 require(data.length >= 1, "won't generate root for single leaf");
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 102
+    Result: Killed
+    Original line:
+                     for (uint256 i = 0; i < length - 1; i += 2) {
+
+    Mutated line:
+                     for (uint256 i = 0; i < length + 1; i += 2) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 23
+    Result: Killed
+    Original line:
+                     for (uint256 i = 0; i < length; ++i) {
+
+    Mutated line:
+                     for (uint256 i = 0; i <= length; ++i) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 137
+    Result: Killed
+    Original line:
+                 return address(uint160(data >> 96));
+
+    Mutated line:
+                 return address(uint160(data << 96));
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 102
+    Result: Lived
+    Original line:
+                     for (uint256 i = 0; i < length - 1; i += 2) {
+
+    Mutated line:
+                     for (uint256 i = 0; i < length - 1; i -= 2) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 140
+    Result: Lived
+    Original line:
+                     msb += 128;
+
+    Mutated line:
+                     msb -= 128;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 171
+    Result: Lived
+    Original line:
+                 if ((lsb == _x) && (msb > 0)) {
+
+    Mutated line:
+                 if ((lsb == _x) && (msb <= 0)) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 95
+    Result: Killed
+    Original line:
+                     if (length & 0x1 == 1) {
+
+    Mutated line:
+                     if (length & 0x1 != 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/StakingManager.sol
+    Line nr: 32
+    Result: Error
+    Original line:
+             constructor(LimitedEditionNFT _nftContract, RewardToken _rewardToken) Ownable(msg.sender) {
+
+    Mutated line:
+             constructor(LimitedEditionNFT _nftContract, RewardToken _rewardToken)  {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 66
+    Result: Lived
+    Original line:
+                 require(data.length > 1, "won't generate proof for single leaf");
+
+    Mutated line:
+                 require(data.length >= 1, "won't generate proof for single leaf");
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 68
+    Result: Killed
+    Original line:
+                 uint256 bit = uint256(1) << (addressAsUint % 256);
+
+    Mutated line:
+                 uint256 bit = uint256(1) >> (addressAsUint % 256);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 36
+    Result: Killed
+    Original line:
+                 if (remainingSupply < 1) revert MaxSupplyReached();
+
+    Mutated line:
+                 if (remainingSupply <= 1) revert MaxSupplyReached();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 while (data.length > 1) {
+
+    Mutated line:
+                 while (data.length <= 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 if (discountBitmap[index] & bit != 0) revert AlreadyMinted();
+
+    Mutated line:
+                 if (discountBitmap[index] & bit == 0) revert AlreadyMinted();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 37
+    Result: Killed
+    Original line:
+                 if (msg.value < price) revert InsufficientFunds();
+
+    Mutated line:
+                 if (msg.value <= price) revert InsufficientFunds();
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 86
+    Result: Killed
+    Original line:
+                 if (to == address(0)) revert InvalidAddress(to);
+
+    Mutated line:
+                 if (to != address(0)) revert InvalidAddress(to);
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 167
+    Result: Killed
+    Original line:
+                     msb += 1;
+
+    Mutated line:
+                     msb -= 1;
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/RewardToken.sol
+    Line nr: 14
+    Result: Error
+    Original line:
+             constructor() ERC20("RewardToken", "RTK") Ownable(msg.sender) {}
+
+    Mutated line:
+             constructor() ERC20("RewardToken", "RTK")  {}
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 72
+    Result: Killed
+    Original line:
+                         if (node & 0x1 == 1) {
+
+    Mutated line:
+                         if (node | 0x1 == 1) {
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/LimitedEditionNFT.sol
+    Line nr: 79
+    Result: Killed
+    Original line:
+                 _mintNFT(to);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /Users/jocoders/Projects/Personal/RARE_SKILLS/nft-reward-hub/src/Merkle.sol
+    Line nr: 124
+    Result: Lived
+    Original line:
+                     ceil -= pOf2;
+
+    Mutated line:
+                     ceil += pOf2;
+
+
