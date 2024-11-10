@@ -377,6 +377,42 @@ contract StakingManagerTest is Test {
         vm.stopPrank();
     }
 
+    function testWithdrawWithZeroReward() public {
+        testAcceptRewardTokenOwnership();
+        uint256 nftId = 1000;
+        nft.mint{value: BASE_PRICE}(alice);
+
+        vm.startPrank(alice);
+        nft.approve(address(manager), nftId);
+        manager.depositNFT(nftId);
+
+        uint256 reward = manager.checkReward(nftId);
+        assertEq(reward, 0, "Reward should be 0 before withdrawal");
+
+        vm.expectRevert(abi.encodeWithSignature("NoReward(uint256)", 0));
+        manager.withdrawReward(nftId);
+        vm.stopPrank();
+    }
+
+    function testBobCanDepositNewNFT() public {
+        uint256 nftId = 1000;
+
+        nft.mint{value: BASE_PRICE}(bob);
+
+        vm.startPrank(bob);
+        nft.approve(address(manager), nftId);
+        vm.expectEmit(address(manager));
+        emit Staked(bob, nftId);
+        manager.depositNFT(nftId);
+        vm.stopPrank();
+
+        uint256 stak = manager.stakings(nftId);
+        uint256 bobNftBalance = nft.balanceOf(bob);
+
+        assertNotEq(stak, 0, "Stak should not be 0");
+        assertEq(bobNftBalance, 0, "Bob should not have NFT");
+    }
+
     function testAlice1HourWithdraw() public {
         testAcceptRewardTokenOwnership();
         uint256 nftId = 1000;
